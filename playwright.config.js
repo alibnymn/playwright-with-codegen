@@ -6,10 +6,11 @@
     timeout: 30000,
     use: {
       browserName: 'chromium',
-      headless: false, 
+      headless: !!process.env.CI,
     },
     reporter: [
       ['list'], 
       ['./excelReporter.js']
     ],
+
   });
