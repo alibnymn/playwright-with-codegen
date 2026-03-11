@@ -1,4 +1,9 @@
 import { defineConfig, devices } from '@playwright/test';
+import path from 'path'; // Tambahkan import ini
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   testDir: './test',
@@ -6,7 +11,7 @@ export default defineConfig({
   
   reporter: [
     ['list'],
-    ['./ExcelReporter.js']
+    [path.join(__dirname, './excelReporter.js')] 
   ],
 
   use: {
