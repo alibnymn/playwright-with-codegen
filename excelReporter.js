@@ -8,14 +8,9 @@ class ExcelReporter {
   }
 
   getCleanMenuName(filePath) {
-    // 1. Ambil nama file dasar
     let name = path.basename(filePath, '.spec.js').toLowerCase();
-    
-    // 2. HAPUS semua kata yang tidak diinginkan secara paksa
     name = name.replace(/[-_]positive/g, '');
     name = name.replace(/[-_]negative/g, '');
-    
-    // 3. Ambil kata pertama (setelah dibersihkan) dan kapitalisasi
     const firstWord = name.split(/[-_]/)[0];
     return firstWord.toUpperCase();
   }
@@ -42,7 +37,6 @@ class ExcelReporter {
       .replace(testId + ' | ', '')
       .trim();
 
-    // Simpan ke results dengan menuName yang sudah dibersihkan
     this.results.push({
       testId,
       platform: platformName,
@@ -63,7 +57,6 @@ class ExcelReporter {
     const workbook = new ExcelJS.Workbook();
     const sheet = workbook.addWorksheet('Test Results');
 
-    // Kolom Header
     sheet.columns = [
       { key: 'no', width: 6 },
       { key: 'testId', width: 15 },
@@ -77,27 +70,23 @@ class ExcelReporter {
       { key: 'file', width: 40 }
     ];
 
-    // Judul
     sheet.mergeCells('C2:J2');
     sheet.getCell('C2').value = 'FORM TEST CASE AUTOMATION';
     sheet.getCell('C2').font = { bold: true, size: 18 };
     sheet.getCell('C2').alignment = { horizontal: 'center' };
 
-    // Info Header
     const displayMenu = this.results.length > 0 ? this.results[0].menuName : 'GENERAL';
-    sheet.getCell('A4').value = 'PROGRAM :'; sheet.getCell('C4').value = 'PRODUKSI';
+    sheet.getCell('A4').value = 'PROGRAM :'; sheet.getCell('C4').value = 'saucedemo.com';
     sheet.getCell('A5').value = 'MENU :'; sheet.getCell('C5').value = displayMenu;
     sheet.getCell('A6').value = 'VERSI :'; sheet.getCell('C6').value = 'DEFAULT';
     sheet.getCell('A7').value = 'TANGGAL :'; sheet.getCell('C7').value = new Date().toLocaleDateString('id-ID');
 
-    // Header Tabel
     const headers = ['NO', 'ID', 'PLATFORM/BROWSER', 'PRE-REQUIREMENT', 'KIND OF TEST', 'DESCRIPTION', 'STATUS', 'Duration (ms)', 'EXECUTED BY', 'File Spec'];
     const headerRow = sheet.getRow(8);
     headerRow.values = headers;
     headerRow.font = { bold: true, color: { argb: 'FFFFFFFF' } };
     headerRow.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF000000' } };
 
-    // Data Rows
     this.results.forEach((r, index) => {
       const row = sheet.addRow({
         no: index + 1,
@@ -117,6 +106,10 @@ class ExcelReporter {
         type: 'pattern', pattern: 'solid',
         fgColor: { argb: r.status === 'passed' ? 'FFB7E1CD' : 'FFFFC7CE' }
       };
+
+      row.eachCell((cell) => {
+        cell.border = { top: { style: 'thin', color: { argb: 'FFE0E0E0' } }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
+      });
     });
 
     const outputPath = path.join(process.cwd(), 'playwright-test-report.xlsx');
