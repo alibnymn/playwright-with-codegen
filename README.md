@@ -1,4 +1,5 @@
 Project 🎭 Playwright Automation with Codegen
+
 ![2](https://github.com/user-attachments/assets/f836e19a-9c9a-49c7-88b5-2f9496e08f29)
 
 Project ini berisi kumpulan automation script yang dikembangkan menggunakan **Playwright**. Fokus utamanya adalah efisiensi pengembangan script melalui fitur **Codegen** untuk menangkap interaksi user secara real-time dan mengubahnya menjadi kode yang siap pakai.
@@ -20,19 +21,19 @@ Sebelum menjalankan project ini, pastikan lo sudah menginstal:
 
 ## 📦 Instalasi
 
-1.  Clone repository ini:
+1.  Clone repository ini :
     ```bash
     git clone https://github.com/alibnymn/playwright-with-codegen.git
     ```
-2.  Masuk ke folder project:
+2.  Masuk ke folder project :
     ```bash
     cd playwright-with-codegen
     ```
-3.  Instal dependencies:
+3.  Instal dependencies :
     ```bash
     npm install
     ```
-4.  Instal browser Playwright:
+4.  Instal browser Playwright :
     ```bash
     npx playwright install
     ```
@@ -40,7 +41,7 @@ Sebelum menjalankan project ini, pastikan lo sudah menginstal:
 
 ## 💡 Cara Menggunakan Codegen
 
-Untuk membuat script baru secara otomatis, jalankan perintah berikut:
+Untuk membuat script baru secara otomatis, jalankan perintah berikut :
 
 ```bash
 npx playwright codegen https://www.saucedemo.com/
@@ -50,13 +51,13 @@ npx playwright codegen https://www.saucedemo.com/
 
 ## 🏃 Cara Menjalankan Test
 
-Jalankan script yang sudah ada dengan perintah:
-"npx playwright test nama-script-lo.js" seperti perintah dibawah ini misalkan
+Jalankan script yang sudah ada dengan perintah :
+
 ```bash
 npx playwright test  test/Login-positive.spec.js --ui
 ```
 
-Atau jika menggunakan Playwright Test Runner:
+Atau jika menggunakan Playwright Test Runner :
 
 ```bash
 npx playwright test
