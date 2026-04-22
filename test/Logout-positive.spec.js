@@ -1,6 +1,9 @@
 import { test, expect } from '@playwright/test';
-
-test('TC_L_001 | Login Positif', async ({ page }) => {
+import { allure } from "allure-playwright";
+allure.epic("Logout");
+allure.feature("Positive Logout");
+allure.story("TC_L_001 | Logout Positif");
+test('TC_L_001 | Logout Positif', async ({ page }) => {
   await page.goto('https://www.saucedemo.com/');
   await page.locator('[data-test="username"]').click();
   await page.locator('[data-test="username"]').fill('standard_user');

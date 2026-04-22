@@ -11,13 +11,18 @@ export default defineConfig({
   
   reporter: [
     ['list'],
-    [path.join(__dirname, './excelReporter.js')] 
+    [path.join(__dirname, './excelReporter.js')],
+    ['allure-playwright', { outputFolder: 'allure-results' }] 
   ],
 
   use: {
     actionTimeout: 20000,
     navigationTimeout: 60000,
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
+    trace: 'on-first-retry',
   },
+
 
   projects: [
     {
